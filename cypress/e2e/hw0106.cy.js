@@ -21,4 +21,4 @@ describe('Automation Test Store', () => {
         cy.get('#checkout_btn').click();
         cy.get('#maincontainer').should('contain.text', 'Your Order Has Been Processed!');
     });
-})
+});
