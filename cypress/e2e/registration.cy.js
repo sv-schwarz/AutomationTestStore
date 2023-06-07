@@ -1,3 +1,16 @@
+import {faker} from '@faker-js/faker'
+import user from '../fixtures/user.json'
+import { login } from '../support/helper.js'
+
+user.username = faker.internet.userName();
+user.firstName = faker.person.firstName('female');
+user.lastName = faker.person.lastName();
+user.postCode = faker.location.zipCode('####');
+user.address = faker.location.street();
+user.email = faker.internet.email();
+user.password = faker.internet.password({ length: 20 });
+
+
 it('Registration', () => {
   cy.visit('/');
 
@@ -28,9 +41,14 @@ it('Registration', () => {
 
   cy.get('#maincontainer').contains(user.firstName).should('exist');
 
+  cy.clearAllCookies()
+
+  //login(user);
+  cy.login(user);
+  
 })
 
-it('Authorization', () => {
+it.skip('Authorization', () => {
 
   cy.log('Open website login page');
   cy.visit('/index.php?rt=account/login');
