@@ -1,5 +1,7 @@
 pipeline{
     agent any
+
+    tools {nodejs "NodeJS"}
     
         stages {
             stage('Install dependencies') { 
@@ -9,6 +11,7 @@ pipeline{
             }
             stage('Cypress run') { 
                 steps {
+                    catchError
                     sh 'allure:clearData'
                     sh 'cy:testWithAllureReport'
                 }
